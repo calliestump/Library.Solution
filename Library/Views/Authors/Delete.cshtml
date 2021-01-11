@@ -1,0 +1,16 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Library.Models.Author
+<div class="container card">
+    <h1>Delete This Author?</h1>
+
+    @Html.DisplayFor(model => model.AuthorName)
+    @using (Html.BeginForm())
+    {
+        <input class="btn btn-warning" type="submit" value="Delete" />
+    }
+    <input class="btn btn-info" type="button" value="Authors" onclick='location.href="@Url.Action("Index")";' />
+    <input class="btn btn-info" type="button" value="Home" onclick='location.href="@Url.Action("Index", "Home")";' />
+</div>

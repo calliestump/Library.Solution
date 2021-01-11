@@ -1,0 +1,33 @@
+.card  {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  padding: 1%;
+  background-color: rgba(255, 255, 255, 0.671);
+  border-radius: 10px;
+  color: rgb(0, 0, 0);
+  width: 4in;
+}
+
+.nav {
+  background-color: rgba(255, 255, 255, 0.644);
+  font-family: 'Fredericka the Great', cursive;
+  color :rgb(0, 0, 0);
+  font-size: large;
+}
+
+body {
+  text-align: center;
+  display: auto;
+  background-image: url("");
+}
+
+/* div#footer {
+  background-color: rgba(255, 255, 255, 0.644);
+  font-family: 'Fredericka the Great', cursive;
+  color: rgb(0, 0, 0);
+  position:fixed;
+  bottom:0px;
+  left:0px;
+  width:100%;
+  text-align: center;
+} */

@@ -1,0 +1,30 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models;
+@using System.Security.Claims
+@model IEnumerable<Library.Models.Book>
+<div class="container card">
+<h1>Books for @User.Identity.Name</h1>
+<form>
+    <i class="glyphicon glyphicon-search"></i><input type="text" name="BookSearch" placeholder="search and press enter">
+</form>
+
+@if (Model.Any())
+{
+  <ul>
+    @foreach (Book book in Model)
+    {
+      <li>@Html.ActionLink($"{book.BookName}", "Details", new { id = book.BookId })</li>
+    }
+  </ul>  
+}
+else
+{
+  <h3>No books have been added.</h3>
+}
+<p>@Html.ActionLink("Add new book", "Create")</p>
+
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
+</div>

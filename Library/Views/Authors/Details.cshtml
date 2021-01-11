@@ -1,0 +1,28 @@
+@{
+    Layout = "_Layout";
+}
+
+@model Library.Models.Author;
+<div class="container card">
+<h2>Author Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.AuthorName): @Html.DisplayFor(model => model.AuthorName)
+
+@if(@Model.Books.Count == 0)
+{
+  <p>No books assigned to this author</p>
+}
+else
+{
+  <h4>Authored books:</h4>
+  <ul>
+  @foreach(var join in Model.Books)
+  {
+    <li>@join.Book.BookName</li>
+  }
+  </ul>
+}
+
+<p>@Html.ActionLink("Edit author", "Edit", new { id = Model.AuthorId })</p>
+<p>@Html.ActionLink("Back to authors page", "Index")</p>
+</div>
