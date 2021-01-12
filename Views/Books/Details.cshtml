@@ -8,6 +8,15 @@
   <h2>Book Details</h2>
   <hr />
   <h3>@Html.DisplayName("Title"): @Html.DisplayFor(model => model.BookName)</h3>
+  
+  @if(@Model.Copies.Count == 0)
+  {
+    <p>There are no available copies of this book</p>
+  }
+  else
+  {
+    <p>Number of available copies: @Model.Copies.Count </p>
+  }
 
   @if(@Model.Authors.Count == 0)
   {

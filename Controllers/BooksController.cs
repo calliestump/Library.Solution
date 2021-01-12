@@ -89,11 +89,11 @@ namespace Library.Controllers
 
     public ActionResult Details(int id)
     {
+      
       var thisBook = _db.Books
           .Include(book => book.Authors)
           .ThenInclude(join => join.Author)
-          // .Include(book => book.Copies)
-          // .ThenInclude(join => join.Copy)
+          .Include(book => book.Copies)
           .FirstOrDefault(book => book.BookId == id);
       return View(thisBook);
     }
@@ -178,14 +178,12 @@ namespace Library.Controllers
     public ActionResult AddCopy(int id)
     {
       var thisBook = _db.Books.FirstOrDefault(books => books.BookId == id);
-      // ViewBag.CopyId = new SelectList(_db.Copies, "CopyId");
       return View(thisBook);
     }
 
     [HttpPost]
     public ActionResult AddCopy(Copy copy)
     {
-      Console.WriteLine("In AddCopy");
       _db.Copies.Add(copy);
       _db.SaveChanges();
       return RedirectToAction("Index");
