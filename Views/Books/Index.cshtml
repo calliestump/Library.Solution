@@ -10,7 +10,7 @@
 <form>
     <i class="glyphicon glyphicon-search"></i><input type="text" name="BookSearch" placeholder="search and press enter">
 </form>
-<br>
+<br />
 @if (Model.Any())
 {
     @foreach (Book book in Model)
@@ -22,8 +22,12 @@ else
 {
   <h3>No books have been added.</h3>
 }
-<br><p>@Html.ActionLink("See All Books", "Index")</p>
-<br><input class="btn btn-info" type="button" value="Delete All Books" onclick='location.href="@Url.Action("DeleteAll")";' /><br>
-<br><p>@Html.ActionLink("Add new book", "Create")</p>
-<br><p>@Html.ActionLink("Home", "Index", "Home")</p>
+<br />
+<p>@Html.ActionLink("See All Books", "Index")</p>
+@* <br><p>@Html.ActionLink("Checkout Books", "Index","Checkedout")</p> *@
+<br />
+<input class="btn btn-info" type="button" value="Delete All Books" onclick='location.href="@Url.Action("DeleteAll")";' /><br>
+<br />
+<p>@Html.ActionLink("Add new book", "Create")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
 </div>
