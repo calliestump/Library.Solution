@@ -188,5 +188,25 @@ namespace Library.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    public ActionResult CheckoutCopy(int id)
+    {
+      var thisCopy = _db.Copies.FirstOrDefault(copies => copies.CopyId == id);
+      return View(thisCopy);
+    }
+
+    [HttpPost]
+    public ActionResult CheckoutCopy(Checkout checkout, int CopyId)
+    {
+      if (CopyId != 0)
+      {
+        
+        _db.Checkouts.Add(new Checkout() { CopyId == CopyId, CheckedOut == true });
+        // _db.Checkouts.CheckedOut == true; // Hopefully set CheckedOut value from false to true.. fingers crossed.
+      }
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
+

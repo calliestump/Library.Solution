@@ -1932,6 +1932,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/callie/Desktop/Week12/Library.Solution/Library/Views/Books/CheckoutCopy.cshtml",
+      "TargetPath": "Views\\Books\\CheckoutCopy.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/callie/Desktop/Week12/Library.Solution/Library/Views/Books/Delete.cshtml",
       "TargetPath": "Views\\Books\\Delete.cshtml",
       "FileKind": "mvc"

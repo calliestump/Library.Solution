@@ -10,6 +10,8 @@ namespace Library.Models
     public virtual DbSet<AuthorBook> AuthorBook {get; set; }
     public virtual DbSet<Copy> Copies { get; set; }
 
+    public virtual DbSet<Checkout> Checkouts { get; set; }
+
     public LibraryContext(DbContextOptions options) : base(options) {}
   }
 }
