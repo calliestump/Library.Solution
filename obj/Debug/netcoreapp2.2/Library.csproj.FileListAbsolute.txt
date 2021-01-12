@@ -40,3 +40,4 @@
 /Users/callie/Desktop/Week12/Library.Solution/Library/obj/Debug/netcoreapp2.2/Library.Views.pdb
 /Users/callie/Desktop/Week12/Library.Solution/Library/obj/Debug/netcoreapp2.2/Library.csproj.CopyComplete
 /Users/callie/Desktop/Week12/Library.Solution/Library/obj/Debug/netcoreapp2.2/Razor/Views/Books/AddAuthor.g.cshtml.cs
+/Users/callie/Desktop/Week12/Library.Solution/Library/obj/Debug/netcoreapp2.2/Razor/Views/Books/AddCopy.g.cshtml.cs

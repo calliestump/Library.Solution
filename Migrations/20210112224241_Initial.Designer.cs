@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20210111212959_Patron")]
-    partial class Patron
+    [Migration("20210112224241_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -259,7 +259,7 @@ namespace Library.Migrations
             modelBuilder.Entity("Library.Models.Copy", b =>
                 {
                     b.HasOne("Library.Models.Book", "Book")
-                        .WithMany()
+                        .WithMany("Copies")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

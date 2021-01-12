@@ -113,24 +113,6 @@ namespace Library.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("Library.Models.BookCopy", b =>
-                {
-                    b.Property<int>("BookCopyId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("BookId");
-
-                    b.Property<int>("CopyId");
-
-                    b.HasKey("BookCopyId");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("CopyId");
-
-                    b.ToTable("BookCopy");
-                });
-
             modelBuilder.Entity("Library.Models.Copy", b =>
                 {
                     b.Property<int>("CopyId")
@@ -272,23 +254,10 @@ namespace Library.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Library.Models.BookCopy", b =>
-                {
-                    b.HasOne("Library.Models.Book", "Book")
-                        .WithMany("Copies")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Library.Models.Copy", "Copy")
-                        .WithMany()
-                        .HasForeignKey("CopyId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Library.Models.Copy", b =>
                 {
                     b.HasOne("Library.Models.Book", "Book")
-                        .WithMany()
+                        .WithMany("Copies")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

@@ -27,7 +27,10 @@
     }
   }
 
-  <br><p>@Html.ActionLink("Back to books page", "Index")</p>
+  <p>@Html.ActionLink("Add a copy", "AddCopy", new { id = Model.BookId })</p>
+  <br />
+  <p>@Html.ActionLink("Back to books page", "Index")</p>
   <p>@Html.ActionLink("Add author", "AddAuthor", new { id = Model.BookId })</p>
+  <p>@Html.ActionLink("Delete Book", "Delete", new { id = Model.BookId })</p>
   <p>@Html.ActionLink("Home", "Index", "Home")</p>
 </div>

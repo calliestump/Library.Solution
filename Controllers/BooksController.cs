@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 using Microsoft.AspNetCore.Authorization; // allows us to authorize users
 using Microsoft.AspNetCore.Identity; // allows controller to interact with users from the database
@@ -71,7 +72,7 @@ namespace Library.Controllers
       if (existingBook != null)
       {
         //Response.Redirect("Create");
-        ModelState.AddModelError(string.Empty, "This book already exists");
+        ModelState.AddModelError(string.Empty, "This book already exists"); // Not handling exception
       }
       else
       {
@@ -174,15 +175,20 @@ namespace Library.Controllers
     }
 
 
-    [HttpPost]
-    public ActionResult Copy(int id)
+    public ActionResult AddCopy(int id)
     {
-        _db.Copies.Add(new Copy() {BookId =id});
-        _db.SaveChanges();
-        return RedirectToAction("Index");
+      var thisBook = _db.Books.FirstOrDefault(books => books.BookId == id);
+      // ViewBag.CopyId = new SelectList(_db.Copies, "CopyId");
+      return View(thisBook);
     }
 
-
-
+    [HttpPost]
+    public ActionResult AddCopy(Copy copy)
+    {
+      Console.WriteLine("In AddCopy");
+      _db.Copies.Add(copy);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
