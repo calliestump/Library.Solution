@@ -24,18 +24,21 @@ namespace Library.Controllers
       _userManager = userManager;
       _db = db;
     }
+
     public async Task<ActionResult> Index(string BookSearch)
     {
+      List<Book> model = _db.Books.ToList();
+      if(BookSearch!=null) {
+          model = _db.Books.Where(book => book.BookName.Contains(BookSearch)).ToList();
+      }
+      // return View(model);
+
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value; // refers it BooksController. FindFirst() is a method that locates the first record that meets criterea. '?' existential operator; states that we should only call the method to the right of the ? if the method to the left of the ? doesn't return null.
       var currentUser = await _userManager.FindByIdAsync(userId); //calls UserManager service. FindByIdAsync() finds a user's account by their unique ID.
-      var userBooks = _db.Books.Where(entry => entry.User.Id == currentUser.Id); // // stores a collection containing only the Items that are associated with the currently-logged-in user's unique Id property
-      return View(userBooks);
+      // var userBooks = _db.Books.Where(entry => entry.User.Id == currentUser.Id); 
+      // stores a collection containing only the Items that are associated with the currently-logged-in user's unique Id property
+      return View(model);
     } 
-
-    //  if(AuthorSearch!=null) {
-    //       model = _db.Authors.Where(authors => authors.AuthorName.Contains(AuthorSearch)).ToList();
-    //   }
-    // return View(BookSearch);
 
     public ActionResult Create()
     {
@@ -57,14 +60,18 @@ namespace Library.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
     public ActionResult Details(int id)
     {
       var thisBook = _db.Books
           .Include(book => book.Authors)
           .ThenInclude(join => join.Author)
+          .Include(book => book.Copies)
+          .ThenInclude(join => join.Copy)
           .FirstOrDefault(book => book.BookId == id);
       return View(thisBook);
     }
+
     public ActionResult Edit(int id)
     {
       var thisBook = _db.Books.FirstOrDefault(books => books.BookId == id);
@@ -82,6 +89,7 @@ namespace Library.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
     public ActionResult AddAuthor(int id)
     {
       var thisBook = _db.Books.FirstOrDefault(books => books.BookId == id);
@@ -138,6 +146,17 @@ namespace Library.Controllers
     _db.SaveChanges();
     return RedirectToAction("Index");
     }
+
+
+    [HttpPost]
+    public ActionResult Copy(int id)
+    {
+        _db.Copies.Add(new Copy() {BookId =id});
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+    }
+
+
 
   }
 }

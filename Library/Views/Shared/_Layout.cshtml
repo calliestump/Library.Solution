@@ -4,20 +4,23 @@
     <meta charset="utf-8">
     <title>Library</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/styles.css">
   </head>
   <body>
-    <h1>The Library</h1>
     <div class="nav">
-      <nav class="navbar navbar-expand">
-        <ul class="navbar-nav">
-          <h4>|<a class="nav-link" href="/"> Home</a>
+      @* <nav class="navbar navbar-expand"> *@
+        <h1>The Library</h1>
+        @* <ul class="navbar-nav"> *@
+          <h4><a class="nav-link" href="/"> Home</a>
           @* <a class="nav-link" href="/Books">Books</a>
           <a class="nav-link" href="/Authors">Authors</a> *@
           |<a class="nav-link" href="/Account/Register"> Create Account</a>
-          |<a class="nav-link" href="/Account/Login"> Log In </a> |</h4> 
+          |<a class="nav-link" href="/Account/Login"> Log In </a></h4> 
         </ul>
       </nav>
+    </div>
+      <div class="col-md-5" class="container card" style="margin: auto;"></div>
       @Html.Partial("Header")
       @RenderBody()
     </div>

@@ -3,14 +3,16 @@ using System;
 using Library.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Library.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    partial class LibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20210111212959_Patron")]
+    partial class Patron
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,42 +115,6 @@ namespace Library.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("Library.Models.BookCopy", b =>
-                {
-                    b.Property<int>("BookCopyId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("BookId");
-
-                    b.Property<int>("CopyId");
-
-                    b.HasKey("BookCopyId");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("CopyId");
-
-                    b.ToTable("BookCopy");
-                });
-
-            modelBuilder.Entity("Library.Models.CheckedOut", b =>
-                {
-                    b.Property<int>("CheckedOutId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("CopyId");
-
-                    b.Property<int>("PatronId");
-
-                    b.HasKey("CheckedOutId");
-
-                    b.HasIndex("CopyId");
-
-                    b.HasIndex("PatronId");
-
-                    b.ToTable("CheckedOuts");
-                });
-
             modelBuilder.Entity("Library.Models.Copy", b =>
                 {
                     b.Property<int>("CopyId")
@@ -156,31 +122,11 @@ namespace Library.Migrations
 
                     b.Property<int>("BookId");
 
-                    b.Property<bool>("CheckedOut");
-
                     b.HasKey("CopyId");
 
                     b.HasIndex("BookId");
 
                     b.ToTable("Copies");
-                });
-
-            modelBuilder.Entity("Library.Models.Patron", b =>
-                {
-                    b.Property<int>("PatronId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("PatronName");
-
-                    b.Property<int>("Status");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("PatronId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Patron");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -310,45 +256,12 @@ namespace Library.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Library.Models.BookCopy", b =>
-                {
-                    b.HasOne("Library.Models.Book", "Book")
-                        .WithMany("Copies")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Library.Models.Copy", "Copy")
-                        .WithMany()
-                        .HasForeignKey("CopyId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Library.Models.CheckedOut", b =>
-                {
-                    b.HasOne("Library.Models.Copy", "Copy")
-                        .WithMany("Patrons")
-                        .HasForeignKey("CopyId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Library.Models.Patron", "Patron")
-                        .WithMany("Copies")
-                        .HasForeignKey("PatronId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Library.Models.Copy", b =>
                 {
                     b.HasOne("Library.Models.Book", "Book")
                         .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Library.Models.Patron", b =>
-                {
-                    b.HasOne("Library.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

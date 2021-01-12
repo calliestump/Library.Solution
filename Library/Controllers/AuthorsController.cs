@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Library.Controllers
 {
@@ -21,11 +22,12 @@ namespace Library.Controllers
     {
       List<Author> model = _db.Authors.ToList();
       if(AuthorSearch!=null) {
-          model = _db.Authors.Where(authors => authors.AuthorName.Contains(AuthorSearch)).ToList();
+          model = _db.Authors.Where(author => author.AuthorName.Contains(AuthorSearch)).ToList();
       }
       return View(model);
     }
 
+    //[Authorize(Roles = "Administrator")]
     public ActionResult Create()
     {
       return View();
@@ -48,6 +50,7 @@ namespace Library.Controllers
       return View(thisAuthor);
     }
 
+    //[Authorize(Roles = "Administrator")]
     public ActionResult Edit(int id)
     {
       var thisAuthor = _db.Authors.FirstOrDefault(author => author.AuthorId == id);
@@ -61,6 +64,7 @@ namespace Library.Controllers
       return RedirectToAction("Index");
     }
 
+    //[Authorize(Roles = "Administrator")]    
     public ActionResult Delete(int id)
     {
         var thisBook = _db.Books.FirstOrDefault(Book => Book.BookId == id);
@@ -93,6 +97,5 @@ namespace Library.Controllers
     _db.SaveChanges();
     return RedirectToAction("Index");
     }
-
   }
 }

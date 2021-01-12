@@ -6,6 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Library.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 
 namespace Library
 {
@@ -32,6 +35,13 @@ namespace Library
       services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<LibraryContext>()
                 .AddDefaultTokenProviders();
+
+      // services.AddAuthorization(options => // Requires all users to be authenticated.. idk what this is doing 
+      // {
+      //   options.FallbackPolicy = new AuthorizationPolicyBuilder()
+      //       .RequireAuthenticatedUser()
+      //       .Build();
+      // });
       
       services.Configure<IdentityOptions>(options =>
       {
@@ -47,7 +57,6 @@ namespace Library
     public void Configure(IApplicationBuilder app)
     {
       app.UseStaticFiles();
-
       app.UseDeveloperExceptionPage();
 
       app.UseAuthentication();
