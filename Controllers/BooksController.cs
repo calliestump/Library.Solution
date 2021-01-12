@@ -46,13 +46,38 @@ namespace Library.Controllers
       return View();
     }
 
+    // Employee existingEmployee = await _context.Employees.SingleOrDefaultAsync(
+    // m => m.FirstName == employee.FirstName && m.LastName == employee.LastName);
+
+    // if (existingEmployee != null)
+    // {
+    // // The employee already exists.
+    // // Do whatever you need to do - This is just an example.
+    // ModelState.AddModelError(string.Empty, "This employee already exists.");
+    // employee.Departments = _context.Departments.ToList();
+    // employee.Appointments = _context.Appointments.ToList();
+    // return View(employee);
+    // }
+
+    // Your existing code for creating a new employee.
+
     [HttpPost]
     public async Task<ActionResult> Create(Book book, int AuthorId)
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value; // refers it BooksController. FindFirst() is a method that locates the first record that meets criterea. '?' existential operator; states that we should only call the method to the right of the ? if the method to the left of the ? doesn't return null.
       var currentUser = await _userManager.FindByIdAsync(userId); //calls UserManager service. FindByIdAsync() finds a user's account by their unique ID.
       book.User = currentUser;
-      _db.Books.Add(book);
+      var existingBook = await _db.Books.SingleOrDefaultAsync( m => m.BookName == book.BookName );
+      if (existingBook != null)
+      {
+        //Response.Redirect("Create");
+        ModelState.AddModelError(string.Empty, "This book already exists");
+      }
+      else
+      {
+        _db.Books.Add(book);
+      }
+    
       if (AuthorId != 0)
       {
         _db.AuthorBook.Add(new AuthorBook() { AuthorId = AuthorId, BookId = book.BookId });

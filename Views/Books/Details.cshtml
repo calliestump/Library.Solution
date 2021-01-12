@@ -16,7 +16,6 @@
   else
   {
     <h4><u>Authors</u></h4>
-    <ul>
     @foreach(var join in Model.Authors)
     {
       <li>@join.Author.AuthorName</li>
@@ -26,9 +25,9 @@
         <input type="submit" value="Delete"/>
       }
     }
-    </ul>
   }
 
-  <p>@Html.ActionLink("Back to books page", "Index")</p>
+  <br><p>@Html.ActionLink("Back to books page", "Index")</p>
   <p>@Html.ActionLink("Add author", "AddAuthor", new { id = Model.BookId })</p>
+  <p>@Html.ActionLink("Home", "Index", "Home")</p>
 </div>
