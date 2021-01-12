@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+@model Library.Models.Book
+<div class="container card">
+<h1>Edit This Book</h1>
+
+<h4>@Html.DisplayFor(model => model.BookName)</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.BookId) 
+
+    @Html.LabelFor(model => model.BookName)
+    @Html.EditorFor(model => model.BookName)
+
+    <input type="submit" value="Save" class="btn btn-warning"/>
+}
+
+<input class="btn btn-info" type="button" value="Engineer List" onclick='location.href="@Url.Action("Index")";' />
+<input class="btn btn-info" type="button" value="Home" onclick='location.href="@Url.Action("Index", "Home")";' />

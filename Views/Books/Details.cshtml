@@ -1,0 +1,34 @@
+@{
+    Layout = "_Layout";
+}
+
+@model Library.Models.Book;
+
+<div class="container card">
+  <h2>Book Details</h2>
+  <hr />
+  <h3>@Html.DisplayName("Title"): @Html.DisplayFor(model => model.BookName)</h3>
+
+  @if(@Model.Authors.Count == 0)
+  {
+    <p>No authors assigned to this book</p>
+  }
+  else
+  {
+    <h4><u>Authors</u></h4>
+    <ul>
+    @foreach(var join in Model.Authors)
+    {
+      <li>@join.Author.AuthorName</li>
+      @using (Html.BeginForm("DeleteAuthor", "Books"))
+      {
+        @Html.Hidden("joinId", @join.AuthorBookId)
+        <input type="submit" value="Delete"/>
+      }
+    }
+    </ul>
+  }
+
+  <p>@Html.ActionLink("Back to books page", "Index")</p>
+  <p>@Html.ActionLink("Add author", "AddAuthor", new { id = Model.BookId })</p>
+</div>

@@ -1,0 +1,25 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.ViewModels
+
+@model RegisterViewModel
+<div class="container card">
+<h2>Register a new user</h2>
+
+<hr />
+@using (Html.BeginForm("Register", "Account", FormMethod.Post))
+{
+    @Html.LabelFor(user => user.Email)<br>
+    @Html.TextBoxFor(user=> user.Email)<br><br>
+
+    @Html.LabelFor(user=> user.Password)<br>
+    @Html.PasswordFor(user=> user.Password)<br><br>
+
+    @Html.LabelFor(user=> user.ConfirmPassword)<br>
+    @Html.PasswordFor(user=> user.ConfirmPassword)<br><br>
+
+    <input type="submit" value="Register" />
+}
+</div>

@@ -1,0 +1,16 @@
+@{
+  Layout = "_Layout";
+}
+@model List<Library.Models.Book>;
+<div class="container card">
+    <h1>Delete all Books?</h1>
+    <hr>
+    @using (Html.BeginForm())
+    {
+        <button class="btn btn-warning" type="submit" value="DeleteAll">YES</button>
+    }
+    <hr>
+    <br>
+    <input class="btn btn-info" type="button" value="Authors" onclick='location.href="@Url.Action("Index", "Authors")";' />
+    <input class="btn btn-info" type="button" value="Home" onclick='location.href="@Url.Action("Index", "Home")";' />
+</div>

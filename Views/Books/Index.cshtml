@@ -1,0 +1,29 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models;
+@using System.Security.Claims
+@model IEnumerable<Library.Models.Book>
+<div class="container card">
+<h2>Books for @User.Identity.Name</h2>
+<form>
+    <i class="glyphicon glyphicon-search"></i><input type="text" name="BookSearch" placeholder="search and press enter">
+</form>
+<br>
+@if (Model.Any())
+{
+    @foreach (Book book in Model)
+    {
+      <li>@Html.ActionLink($"{book.BookName}", "Details", new { id = book.BookId })</li>
+    }
+}
+else
+{
+  <h3>No books have been added.</h3>
+}
+<br><p>@Html.ActionLink("See All Books", "Index")</p>
+<br><input class="btn btn-info" type="button" value="Delete All Books" onclick='location.href="@Url.Action("DeleteAll")";' /><br>
+<br><p>@Html.ActionLink("Add new book", "Create")</p>
+<br><p>@Html.ActionLink("Home", "Index", "Home")</p>
+</div>
