@@ -27,6 +27,27 @@ namespace Library.Controllers
       List<Patron> model = _db.Patrons.ToList();
       return View(model);
     }
-  }
 
+    public ActionResult Create()
+    {
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create(Patron patron)
+    {
+      _db.Patrons.Add(patron);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    public ActionResult Details(int id)
+    {
+      var thisPatron = _db.Patrons
+          .Include(patron => patron.Copies)
+          .ThenInclude(join => join.Copy)
+          .FirstOrDefault(patron => patron.PatronId == id);
+      return View(thisPatron);
+    }
+  }
 }

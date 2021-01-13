@@ -4,6 +4,9 @@ namespace Library.Models
   {
     public int CheckoutId { get; set; }
     public bool CheckedOut { get; set; } = false;
-    public int CopyId { get; }
+    public int CopyId { get; set; }
+    public int PatronId { get; set; }
+    public Copy Copy { get; set; }
+    public Patron Patron { get; set; }
   }
 }

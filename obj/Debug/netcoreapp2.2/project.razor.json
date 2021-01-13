@@ -1932,6 +1932,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/callie/Desktop/Week12/Library.Solution/Library/Views/Patrons/Details.cshtml",
+      "TargetPath": "Views\\Patrons\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/callie/Desktop/Week12/Library.Solution/Library/Views/Books/CheckoutCopy.cshtml",
       "TargetPath": "Views\\Books\\CheckoutCopy.cshtml",
       "FileKind": "mvc"
@@ -1954,6 +1959,11 @@
     {
       "FilePath": "/Users/callie/Desktop/Week12/Library.Solution/Library/Views/Books/Details.cshtml",
       "TargetPath": "Views\\Books\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/callie/Desktop/Week12/Library.Solution/Library/Views/Patrons/Create.cshtml",
+      "TargetPath": "Views\\Patrons\\Create.cshtml",
       "FileKind": "mvc"
     },
     {

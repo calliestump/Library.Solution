@@ -43,3 +43,5 @@
 /Users/callie/Desktop/Week12/Library.Solution/Library/obj/Debug/netcoreapp2.2/Razor/Views/Books/AddCopy.g.cshtml.cs
 /Users/callie/Desktop/Week12/Library.Solution/Library/obj/Debug/netcoreapp2.2/Razor/Views/Books/CheckoutCopy.g.cshtml.cs
 /Users/callie/Desktop/Week12/Library.Solution/Library/obj/Debug/netcoreapp2.2/Razor/Views/Patrons/Index.g.cshtml.cs
+/Users/callie/Desktop/Week12/Library.Solution/Library/obj/Debug/netcoreapp2.2/Razor/Views/Patrons/Create.g.cshtml.cs
+/Users/callie/Desktop/Week12/Library.Solution/Library/obj/Debug/netcoreapp2.2/Razor/Views/Patrons/Details.g.cshtml.cs
