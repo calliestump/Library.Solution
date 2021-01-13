@@ -1972,6 +1972,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/callie/Desktop/Week12/Library.Solution/Library/Views/Patrons/Index.cshtml",
+      "TargetPath": "Views\\Patrons\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/callie/Desktop/Week12/Library.Solution/Library/Views/Books/DeleteAll.cshtml",
       "TargetPath": "Views\\Books\\DeleteAll.cshtml",
       "FileKind": "mvc"

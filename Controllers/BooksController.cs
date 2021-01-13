@@ -185,28 +185,28 @@ namespace Library.Controllers
     public ActionResult AddCopy(Copy copy)
     {
       _db.Copies.Add(copy);
+      //_db.Checkouts.Add(copy);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
-    public ActionResult CheckoutCopy(int id)
-    {
-      var thisCopy = _db.Copies.FirstOrDefault(copies => copies.CopyId == id);
-      return View(thisCopy);
-    }
+    // public ActionResult CheckoutCopy(int id) // Return to after adding Patron
+    // {
+    //   var thisCopy = _db.Copies.FirstOrDefault(copies => copies.CopyId == id); // Logic not quite correct here..
+    //   return View(thisCopy);
+    // }
 
-    [HttpPost]
-    public ActionResult CheckoutCopy(Checkout checkout, int CopyId)
-    {
-      if (CopyId != 0)
-      {
-        
-        _db.Checkouts.Add(new Checkout() { CopyId == CopyId, CheckedOut == true });
-        // _db.Checkouts.CheckedOut == true; // Hopefully set CheckedOut value from false to true.. fingers crossed.
-      }
-      _db.SaveChanges();
-      return RedirectToAction("Index");
-    }
+    // [HttpPost]
+    // public ActionResult CheckoutCopy(Checkout checkout, int CopyId)
+    // {
+    //   if (CopyId != 0)
+    //   {
+    //     _db.Checkouts.Add(new Checkout() { CopyId == CopyId, CheckedOut == true }); // Left off with this line.
+    //     // _db.Checkouts.CheckedOut == true; // Hopefully set CheckedOut value from false to true.. fingers crossed.
+    //   }
+    //   _db.SaveChanges();
+    //   return RedirectToAction("Index");
+    // }
   }
 }
 
