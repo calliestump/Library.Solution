@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 using Microsoft.AspNetCore.Authorization; // allows us to authorize users
 using Microsoft.AspNetCore.Identity; // allows controller to interact with users from the database
@@ -52,7 +53,17 @@ namespace Library.Controllers
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value; // refers it BooksController. FindFirst() is a method that locates the first record that meets criterea. '?' existential operator; states that we should only call the method to the right of the ? if the method to the left of the ? doesn't return null.
       var currentUser = await _userManager.FindByIdAsync(userId); //calls UserManager service. FindByIdAsync() finds a user's account by their unique ID.
       book.User = currentUser;
-      _db.Books.Add(book);
+      var existingBook = await _db.Books.SingleOrDefaultAsync( m => m.BookName == book.BookName );
+      if (existingBook != null)
+      {
+        //Response.Redirect("Create");
+        ModelState.AddModelError(string.Empty, "This book already exists"); // Not handling exception
+      }
+      else
+      {
+        _db.Books.Add(book);
+      }
+    
       if (AuthorId != 0)
       {
         _db.AuthorBook.Add(new AuthorBook() { AuthorId = AuthorId, BookId = book.BookId });
@@ -63,11 +74,11 @@ namespace Library.Controllers
 
     public ActionResult Details(int id)
     {
+      
       var thisBook = _db.Books
           .Include(book => book.Authors)
           .ThenInclude(join => join.Author)
           .Include(book => book.Copies)
-          .ThenInclude(join => join.Copy)
           .FirstOrDefault(book => book.BookId == id);
       return View(thisBook);
     }
@@ -75,7 +86,7 @@ namespace Library.Controllers
     public ActionResult Edit(int id)
     {
       var thisBook = _db.Books.FirstOrDefault(books => books.BookId == id);
-      ViewBag.CategoryId = new SelectList(_db.Authors, "AuthorId", "AuthorName");
+      ViewBag.AuthorId = new SelectList(_db.Authors, "AuthorId", "AuthorName");
       return View(thisBook);
     }
     [HttpPost]
@@ -93,9 +104,10 @@ namespace Library.Controllers
     public ActionResult AddAuthor(int id)
     {
       var thisBook = _db.Books.FirstOrDefault(books => books.BookId == id);
-      ViewBag.CategoryId = new SelectList(_db.Authors, "BookId", "BookName");
+      ViewBag.AuthorId = new SelectList(_db.Authors, "AuthorId", "AuthorName");
       return View(thisBook);
     }
+
     [HttpPost]
     public ActionResult AddAuthor(Book book, int AuthorId)
     {
@@ -148,15 +160,22 @@ namespace Library.Controllers
     }
 
 
-    [HttpPost]
-    public ActionResult Copy(int id)
+    public ActionResult AddCopy(int id)
     {
-        _db.Copies.Add(new Copy() {BookId =id});
-        _db.SaveChanges();
-        return RedirectToAction("Index");
+      var thisBook = _db.Books.FirstOrDefault(books => books.BookId == id);
+      return View(thisBook);
     }
 
+    [HttpPost]
+    public ActionResult AddCopy(Copy copy)
+    {
+      _db.Copies.Add(copy);
+      //_db.Checkouts.Add(copy);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
 
-
+    
   }
 }
+

@@ -6,13 +6,12 @@ namespace Library.Models
   {
     public Copy()
     {
-      this.Patrons = new HashSet<CheckedOut>();
+      this.Patrons = new HashSet<Checkout>();
     }
       public int CopyId { get; set; }
       public int BookId { get; set; }
-      public bool CheckedOut { get; set; } = false;
-      
+      // public bool CheckedOut { get; set; } = false; 
       public Book Book { get; set; }
-    public ICollection<CheckedOut> Patrons { get; set; }
+      public ICollection<Checkout> Patrons { get; set; }
   }
 }

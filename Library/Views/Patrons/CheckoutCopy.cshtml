@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Library.Models.Patron;
+<div class="container card">
+<h2>Patron checkout: @Html.DisplayFor(model => model.PatronName) </h2>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.PatronId)
+
+  @Html.Label("Select book")
+  <br />
+  @Html.DropDownList("CopyId")
+
+  <input type="submit" value="Save" />
+}
+
+<br />
+<p>@Html.ActionLink("Back to books", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
+</div>

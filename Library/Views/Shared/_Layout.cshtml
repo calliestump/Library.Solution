@@ -9,20 +9,11 @@
   </head>
   <body>
     <div class="nav">
-      @* <nav class="navbar navbar-expand"> *@
-        <h1>The Library</h1>
-        @* <ul class="navbar-nav"> *@
-          <h4><a class="nav-link" href="/"> Home</a>
-          @* <a class="nav-link" href="/Books">Books</a>
-          <a class="nav-link" href="/Authors">Authors</a> *@
-          |<a class="nav-link" href="/Account/Register"> Create Account</a>
-          |<a class="nav-link" href="/Account/Login"> Log In </a></h4> 
-        </ul>
-      </nav>
+      <h1>The Library</h1>
+      <h4><a class="nav-link" href="/"> Home</a>
+      |<a class="nav-link" href="/Account/Register"> Create Account</a>
+      |<a class="nav-link" href="/Account/Login"> Log In </a></h4> 
     </div>
-      <div class="col-md-5" class="container card" style="margin: auto;"></div>
-      @Html.Partial("Header")
-      @RenderBody()
-    </div>
+    @RenderBody()
   </body>
 </html>

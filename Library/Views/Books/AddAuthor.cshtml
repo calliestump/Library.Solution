@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Library.Models.Book
+
+<div class="container card">
+<h2>Add author to @Html.DisplayFor(model => model.BookName)</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.BookId)
+
+  @Html.Label("Select Author")
+  @Html.DropDownList("AuthorId")
+
+  <input type="submit" value="Save" />
+}
+
+<br />
+<p>@Html.ActionLink("Back to books", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
+</div>

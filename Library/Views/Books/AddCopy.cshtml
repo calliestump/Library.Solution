@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Library.Models.Book
+
+<div class="container card">
+<h2>Add copy to @Html.DisplayFor(model => model.BookName)</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.BookId)
+
+
+  <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Back to books", "Index")</p>
+<br />
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
+</div>

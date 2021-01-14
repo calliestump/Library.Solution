@@ -3,37 +3,42 @@
 }
 
 @model Library.Models.Book;
+
 <div class="container card">
-<h2>Book Details</h2>
-<hr />
-<h3>@Html.DisplayName("Title"): @Html.DisplayFor(model => model.BookName)</h3>
-
-@if(@Model.Authors.Count == 0)
-{
-  <p>No authors assigned to this book</p>
-}
-else
-{
-  <h4><u>Authors</u></h4>
-  <ul>
-  @foreach(var join in Model.Authors)
+  <h2>Book Details</h2>
+  <hr />
+  <h3>@Html.DisplayName("Title"): @Html.DisplayFor(model => model.BookName)</h3>
+  
+  @if(@Model.Copies.Count == 0)
   {
-    <li>@join.Author.AuthorName</li>
+    <p>There are no available copies of this book</p>
   }
-  </ul>
-}
-
-<h3>Available Copies:</h3>
-
-
-@foreach(var join in Model.CheckedOut)
-{
-  if (!join.Copy)
+  else
   {
-    
+    <p>Number of available copies: @Model.Copies.Count </p>
   }
-}
 
+  @if(@Model.Authors.Count == 0)
+  {
+    <p>No authors assigned to this book</p>
+  }
+  else
+  {
+    <h4><u>Authors</u></h4>
+    @foreach(var join in Model.Authors)
+    {
+      <li>@join.Author.AuthorName</li>
+      @using (Html.BeginForm("DeleteAuthor", "Books"))
+      {
+        @Html.Hidden("joinId", @join.AuthorBookId)
+        <input type="submit" value="Delete"/>
+      }
+    }
+  }
 
-<p>@Html.ActionLink("Back to books page", "Index")</p>
+  <p>@Html.ActionLink("Add a copy", "AddCopy", new { id = Model.BookId })</p>
+  <p>@Html.ActionLink("Back to books page", "Index")</p>
+  <p>@Html.ActionLink("Add author", "AddAuthor", new { id = Model.BookId })</p>
+  <p>@Html.ActionLink("Delete Book", "Delete", new { id = Model.BookId })</p>
+  <p>@Html.ActionLink("Home", "Index", "Home")</p>
 </div>

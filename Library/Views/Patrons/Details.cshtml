@@ -1,0 +1,29 @@
+@{
+    Layout = "_Layout";
+}
+
+@model Library.Models.Patron;
+<div class="container card">
+<h2>Patron Details</h2>
+<hr />
+<h3>Patron: @Html.DisplayFor(model => model.PatronName) </h3>
+
+@if(Model.Copies.Count == 0)
+{
+    <p>No books have been checked out.</p>
+}
+else
+{
+    <h4>Checked out Books:</h4>
+    <ul>
+    @foreach(var join in Model.Copies)
+    {
+        <li>@join.Copy.CopyId</li> 
+    }
+    </ul>
+}
+<br />
+<p>@Html.ActionLink("Checkout Book", "CheckoutCopy", new { id = Model.PatronId })</p>
+<p>@Html.ActionLink("Back to Patrons page", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
+</div>

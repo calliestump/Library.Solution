@@ -57,6 +57,7 @@ namespace Library.Controllers
       return View(thisAuthor);
     }
 
+    [HttpPost]
     public ActionResult Edit(Author author)
     {
       _db.Entry(author).State = EntityState.Modified;
@@ -67,15 +68,15 @@ namespace Library.Controllers
     //[Authorize(Roles = "Administrator")]    
     public ActionResult Delete(int id)
     {
-        var thisBook = _db.Books.FirstOrDefault(Book => Book.BookId == id);
-        return View(thisBook);
+        var thisAuthor = _db.Authors.FirstOrDefault(Author => Author.AuthorId == id);
+        return View(thisAuthor);
     }
 
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
-        var thisBook = _db.Books.FirstOrDefault(book => book.BookId == id);
-        _db.Books.Remove(thisBook);
+        var thisAuthor = _db.Authors.FirstOrDefault(author => author.AuthorId == id);
+        _db.Authors.Remove(thisAuthor);
         _db.SaveChanges();
         return RedirectToAction("Index");
     }

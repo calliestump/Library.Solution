@@ -113,40 +113,22 @@ namespace Library.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("Library.Models.BookCopy", b =>
+            modelBuilder.Entity("Library.Models.Checkout", b =>
                 {
-                    b.Property<int>("BookCopyId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("BookId");
-
-                    b.Property<int>("CopyId");
-
-                    b.HasKey("BookCopyId");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("CopyId");
-
-                    b.ToTable("BookCopy");
-                });
-
-            modelBuilder.Entity("Library.Models.CheckedOut", b =>
-                {
-                    b.Property<int>("CheckedOutId")
+                    b.Property<int>("CheckoutId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("CopyId");
 
                     b.Property<int>("PatronId");
 
-                    b.HasKey("CheckedOutId");
+                    b.HasKey("CheckoutId");
 
                     b.HasIndex("CopyId");
 
                     b.HasIndex("PatronId");
 
-                    b.ToTable("CheckedOuts");
+                    b.ToTable("Checkouts");
                 });
 
             modelBuilder.Entity("Library.Models.Copy", b =>
@@ -155,8 +137,6 @@ namespace Library.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("BookId");
-
-                    b.Property<bool>("CheckedOut");
 
                     b.HasKey("CopyId");
 
@@ -172,15 +152,9 @@ namespace Library.Migrations
 
                     b.Property<string>("PatronName");
 
-                    b.Property<int>("Status");
-
-                    b.Property<string>("UserId");
-
                     b.HasKey("PatronId");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Patron");
+                    b.ToTable("Patrons");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -310,20 +284,7 @@ namespace Library.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Library.Models.BookCopy", b =>
-                {
-                    b.HasOne("Library.Models.Book", "Book")
-                        .WithMany("Copies")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Library.Models.Copy", "Copy")
-                        .WithMany()
-                        .HasForeignKey("CopyId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Library.Models.CheckedOut", b =>
+            modelBuilder.Entity("Library.Models.Checkout", b =>
                 {
                     b.HasOne("Library.Models.Copy", "Copy")
                         .WithMany("Patrons")
@@ -339,16 +300,9 @@ namespace Library.Migrations
             modelBuilder.Entity("Library.Models.Copy", b =>
                 {
                     b.HasOne("Library.Models.Book", "Book")
-                        .WithMany()
+                        .WithMany("Copies")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Library.Models.Patron", b =>
-                {
-                    b.HasOne("Library.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

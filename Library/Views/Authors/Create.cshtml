@@ -7,11 +7,13 @@
 <h4>Add a new author</h4>
 @using (Html.BeginForm())
 {
-  @Html.LabelFor(model => model.AuthorName)
-  @Html.TextBoxFor(model => model.AuthorName)
+  @Html.Label("Author Name")<br>
+  @Html.TextBoxFor(model => model.AuthorName)<br><br>
 
   <input type="submit" value="Add a new author" />
 }
 
+<br />
 <p>@Html.ActionLink("Show all Authors", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
 </div>

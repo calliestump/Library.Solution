@@ -61,6 +61,19 @@ namespace Library.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Patrons",
+                columns: table => new
+                {
+                    PatronId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    PatronName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Patrons", x => x.PatronId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -231,6 +244,32 @@ namespace Library.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Checkouts",
+                columns: table => new
+                {
+                    CheckoutId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CopyId = table.Column<int>(nullable: false),
+                    PatronId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Checkouts", x => x.CheckoutId);
+                    table.ForeignKey(
+                        name: "FK_Checkouts_Copies_CopyId",
+                        column: x => x.CopyId,
+                        principalTable: "Copies",
+                        principalColumn: "CopyId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Checkouts_Patrons_PatronId",
+                        column: x => x.PatronId,
+                        principalTable: "Patrons",
+                        principalColumn: "PatronId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -284,6 +323,16 @@ namespace Library.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Checkouts_CopyId",
+                table: "Checkouts",
+                column: "CopyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Checkouts_PatronId",
+                table: "Checkouts",
+                column: "PatronId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Copies_BookId",
                 table: "Copies",
                 column: "BookId");
@@ -310,13 +359,19 @@ namespace Library.Migrations
                 name: "AuthorBook");
 
             migrationBuilder.DropTable(
-                name: "Copies");
+                name: "Checkouts");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Authors");
+
+            migrationBuilder.DropTable(
+                name: "Copies");
+
+            migrationBuilder.DropTable(
+                name: "Patrons");
 
             migrationBuilder.DropTable(
                 name: "Books");

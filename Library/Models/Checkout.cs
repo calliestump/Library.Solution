@@ -1,8 +1,9 @@
 namespace Library.Models
 {
-  public class CheckedOut
+  public class Checkout
   {
-    public int CheckedOutId { get; set; }
+    public int CheckoutId { get; set; }
+  
     public int CopyId { get; set; }
     public int PatronId { get; set; }
     public Copy Copy { get; set; }
